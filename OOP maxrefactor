@@ -1,0 +1,8 @@
+class Refactoring
+def max_refactor(*rest)
+		return *rest.sort.last
+	end
+end
+
+refactor = Refactoring.new
+puts refactor.max_refactor(1,2,5,4,3)
