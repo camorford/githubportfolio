@@ -1,0 +1,218 @@
+
+<div class="header">
+</div>
+<hr>
+<div class="description_header"><h3>Incomplete List</h3>
+</div>
+
+
+  <div class="incomplete">
+<table class="incomplete_wording">
+  <tbody>
+    <% @todo_items.each do |todo_item| %>
+      <% unless todo_item.completed %>
+      <tr>
+        <td><%= todo_item.current_state %></td>
+        <td class="title_table"><%= todo_item.title %></td>
+        <td class="list_description"><%= todo_item.description %></td>
+        <td class="duedate">Due in <%= time_ago_in_words(todo_item.due) %></td>
+
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/preview/deep-pink/arrow-4-xxl.png", size: "30x30"), todo_item) %></td>
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/download/deep-pink/edit-512.png", size: "30x30"), edit_todo_item_path(todo_item)) %></td>
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/preview/deep-pink/delete-xxl.png", size: "30x30"), todo_item, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+      </tr>
+        <% end %>  
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<div class="completed_header"><h3>Completed List</h3>
+</div>
+ 
+<div class="completed">
+<table class="completed_wording">
+  <tbody>
+    <% @todo_items.each do |todo_item| %>
+      <% if todo_item.completed %>
+      <tr>
+         <td><%= todo_item.current_state %></td>
+         <td class="title_table"><%= todo_item.title %></td>
+         <td class="list_description"><%= todo_item.description %></td>
+         <td class="duedate">Completed <%= time_ago_in_words(todo_item.updated_at) %> ago</td>
+         <td>Took: <%= distance_of_time_in_words(todo_item.created_at, todo_item.updated_at) %></td>
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/preview/deep-pink/arrow-4-xxl.png", size: "30x30"), todo_item) %></td>
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/download/deep-pink/edit-512.png", size: "30x30"), edit_todo_item_path(todo_item)) %></td>
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/preview/deep-pink/delete-xxl.png", size: "30x30"), todo_item, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+      </tr>
+        <% end %>  
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<div class="newtodolink">
+
+
+
+  <p id="feedback">
+<span>You've selected:</span> <span id="select-result">none</span>.
+</p>
+
+<ol id="selectable">
+        <% @todo_items.each do |todo_item| %>
+      <% if todo_item.completed %>
+  <li class="ui-widget-content"><%= todo_item.description %></li>
+
+<% end %>
+<% end %>
+</ol>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
+      <script>
+  $(function() {
+    $( "#accordion" )
+      .accordion({
+        header: "> div > h3"
+      })
+      .sortable({
+        axis: "y",
+        handle: "h3",
+        stop: function( event, ui ) {
+          // IE doesn't register the blur when sorting
+          // so trigger focusout handlers to remove .ui-state-focus
+          ui.item.children( "h3" ).triggerHandler( "focusout" );
+ 
+          // Refresh accordion to handle new order
+          $( this ).accordion( "refresh" );
+        }
+      });
+  });
+  </script>
+  
+</head>
+<body>
+
+<div class="header">
+</div>
+<hr>
+<div class="description_header"><h3>Incomplete List</h3>
+</div>
+
+
+  <div class="incomplete">
+<table class="incomplete_wording">
+  <tbody>
+    <% @todo_items.each do |todo_item| %>
+      <% unless todo_item.completed %>
+      <tr>
+        <td><%= todo_item.current_state %></td>
+        <td class="title_table"><%= todo_item.title %></td>
+        <td class="list_description"><%= todo_item.description %></td>
+        <td class="duedate">Due in <%= time_ago_in_words(todo_item.due) %></td>
+
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/preview/deep-pink/arrow-4-xxl.png", size: "30x30"), todo_item) %></td>
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/download/deep-pink/edit-512.png", size: "30x30"), edit_todo_item_path(todo_item)) %></td>
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/preview/deep-pink/delete-xxl.png", size: "30x30"), todo_item, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+      </tr>
+        <% end %>  
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<div class="completed_header"><h3>Completed List</h3>
+</div>
+ 
+<div class="completed">
+<table class="completed_wording">
+  <tbody>
+    <% @todo_items.each do |todo_item| %>
+      <% if todo_item.completed %>
+      <tr>
+         <td><%= todo_item.current_state %></td>
+         <td class="title_table"><%= todo_item.title %></td>
+         <td class="list_description"><%= todo_item.description %></td>
+         <td class="duedate">Completed <%= time_ago_in_words(todo_item.updated_at) %> ago</td>
+         <td>Took: <%= distance_of_time_in_words(todo_item.created_at, todo_item.updated_at) %></td>
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/preview/deep-pink/arrow-4-xxl.png", size: "30x30"), todo_item) %></td>
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/download/deep-pink/edit-512.png", size: "30x30"), edit_todo_item_path(todo_item)) %></td>
+        <td><%= link_to(image_tag("http://www.iconsdb.com/icons/preview/deep-pink/delete-xxl.png", size: "30x30"), todo_item, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+      </tr>
+        <% end %>  
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+
+ <style>
+  #feedback { font-size: 1.4em; }
+  #selectable .ui-selecting { background: #FECA40; }
+  #selectable .ui-selected { background: #F39814; color: white; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+  </style>
+  <script>
+  $(function() {
+    $( "#selectable" ).selectable({
+      stop: function() {
+        var result = $( "#select-result" ).empty();
+        $( ".ui-selected", this ).each(function() {
+          var index = $( "#selectable li" ).index( this );
+          result.append( " #" + ( index + 1 ) );
+        });
+      }
+    });
+  });
+  </script>
+</style>
+ 
+
+<p id="feedback">
+<span>You've selected:</span> <span id="select-result">none</span>.
+</p>
+
+<ol id="selectable">
+        <% @todo_items.each do |todo_item| %>
+      <% if todo_item.completed %>
+  <li class="ui-widget-content"><%= todo_item.description %></li>
+
+<% end %>
+<% end %>
+</ol>
+
+</body>
+</html>
+

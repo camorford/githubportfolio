@@ -1,0 +1,19 @@
+class AddNumberError < StandardError 
+
+end
+
+
+def add_two(number1)
+	unless number.is_a? Numeric
+		raise ArgumentError
+	end
+	number + 2
+end
+end
+
+begin
+	puts add_two("hello", 2)
+rescue ArgumentError
+	puts "Wrong Number of Arguments"
+end
+

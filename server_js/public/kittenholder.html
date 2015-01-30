@@ -1,0 +1,46 @@
+<!Doctype html>
+<html>
+<head>
+	<title>Javascript roll over Image</title>
+
+	<!-- Javascript --> 
+<script type="text/javascript">
+
+function rollover(my_image)
+    {
+
+        img id='random'
+
+    }
+    function mouseaway(my_image)
+    {
+
+        my_image.src = "http://placekitten.com.s3.amazonaws.com/homepage-samples/200/287.jpg";
+
+    }
+
+    var image = new Array ();
+image[0] = "http://placekitten.com/g/200/200";
+image[1] = "http://placekitten.com/g/200/300";
+image[2] = "http://placekitten.com/g/300/400";
+image[3] = "http://placehold.it/50";
+var size = image.length
+var x = Math.floor(size*Math.random())
+
+$('#random').attr('src',image[x]);
+
+</script>
+</head>
+
+
+<body>
+
+<img src="http://placekitten.com.s3.amazonaws.com/homepage-samples/200/287.jpg" onmouseover="rollover(this)" 
+onmouseout="mouseaway(this)" />
+
+
+</div>
+
+
+</body>
+</html>

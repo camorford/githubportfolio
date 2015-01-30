@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+
+  <script>
+  $(function() {
+    $( "ul.droptrue" ).sortable({
+      connectWith: "ul"
+    });
+ 
+    $( "ul.dropfalse" ).sortable({
+      connectWith: "ul",
+      dropOnEmpty: false
+    });
+ 
+    $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
+  });
+
+  </script>
+</head>
+<body>
+ 
+<ul id="sortable1" class="droptrue">
+    <h3>Backlog</h3>
+  <% @todo_items.each do |todo_item| %>
+      <% if todo_item.backlog %>
+  <%= link_to list_todo_item_path(@list, todo_item) do %>
+    <li class="ui-state-default">
+      <%= todo_item.title %>
+    </li>
+  <% end %>
+<% end %>
+<% end %>
+</ul>
+
+
+<ul id="sortable1" class="droptrue">
+  <h3>Ready</h3>
+   <% @todo_items.each do |todo_item| %>
+      <% if todo_item.ready %>
+       <%= link_to list_todo_item_path(@list, todo_item) do %>
+  <li class="ui-state-highlight"><%= todo_item.title %></li>
+
+  <% end %>
+  <% end %>
+    <% end %>
+</ul>
+ 
+<ul id="sortable1" class="droptrue">
+  <h3>In Progress</h3>
+     <% @todo_items.each do |todo_item| %>
+      <% if todo_item.in_progress %>
+          <%= link_to list_todo_item_path(@list, todo_item) do %>
+      <li class="ui-state-default"><%= todo_item.title %></li>
+        <% end %>
+       <% end %>
+    <% end %>
+</ul>
+
+<ul id="sortable1" class="droptrue">
+  <h3>Complete</h3>
+       <% @todo_items.each do |todo_item| %>
+      <% if todo_item.completed %> 
+      <%= link_to list_todo_item_path(@list, todo_item) do %>
+         <li class="ui-state-highlight"><%= todo_item.title %></li>
+        <% end %>
+       <% end %>
+    <% end %>
+</ul>
+ 
+<br style="clear:both">
+
+
+<%= link_to 'New Todo item', new_list_todo_item_path(@list) %> |
+
+ 
+ 
+</body>
+</html>
+
